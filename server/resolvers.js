@@ -1,6 +1,6 @@
 import { GraphQLError } from "graphql";
 import { getCompany } from "./db/companies.js";
-import { getJob, getJobs, getJobsByCompany } from "./db/jobs.js";
+import { createJob, getJob, getJobs, getJobsByCompany } from "./db/jobs.js";
 export const resolvers = {
   Query: {
     company: async (_root, { id }) => {
@@ -31,11 +31,17 @@ export const resolvers = {
       return toISODate(job.createdAt);
     },
   },
+  Mutation: {
+    createJob: (_root, { input: {title, description }}) => {
+      const companyId = "FjcJCHJALA4i";
+      return createJob({ companyId, title, description });
+    },
+  },
 };
 
 function NotFoundError(message) {
   return new GraphQLError(message, {
-    extensions: { code: 'NOT_FOUND' },
+    extensions: { code: "NOT_FOUND" },
   });
 }
 
