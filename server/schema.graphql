@@ -1,6 +1,6 @@
 type Query {
-  company(id:ID!):Company
-  job(id:ID!):Job
+  company(id:ID!):Company!
+  job(id:ID!):Job!
   jobs: [Job!],
 }
 
