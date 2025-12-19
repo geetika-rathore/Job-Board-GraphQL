@@ -1,11 +1,14 @@
 import { useState } from 'react';
+import { createJob } from '../lib/graphql/queries';
 
 function CreateJobPage() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit =  async(event) => {
     event.preventDefault();
+   const job= await createJob({title,description});
+   console.log("Job is ",job);
     console.log('should post a new job:', { title, description });
   };
 
